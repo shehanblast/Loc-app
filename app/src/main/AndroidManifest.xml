@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Location_01">
         <activity
+            android:name=".Loc4"
+            android:exported="true" />
+        <activity
             android:name=".Loc3"
             android:exported="true" />
         <activity

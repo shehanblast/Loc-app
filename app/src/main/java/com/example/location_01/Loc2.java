@@ -59,32 +59,6 @@ public class Loc2 extends AppCompatActivity implements LocationListener {
 
         tvLatitude.setText(lat);
         tvLongitude.setText(lon);
-//
-//        fusedLocationProviderClient2 = LocationServices.getFusedLocationProviderClient(
-//                Loc2.this
-//        );
-//
-//        btLocation.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (ActivityCompat.checkSelfPermission(Loc2.this,
-//                        Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-//                        && ActivityCompat.checkSelfPermission(Loc2.this,
-//                        Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-//
-//                    getCurrentLocation();
-//
-//                }else {
-//                    ActivityCompat.requestPermissions(Loc2.this,
-//                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-//                                    Manifest.permission.ACCESS_COARSE_LOCATION},
-//                            100);
-//                }
-//
-//
-//            }
-//        });
-//
 
         //Runtime permissions
         if (ContextCompat.checkSelfPermission(Loc2.this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -150,67 +124,6 @@ public class Loc2 extends AppCompatActivity implements LocationListener {
 
     }
 
-
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        if (requestCode == 100 && grantResults.length > 0 && (grantResults[0] + grantResults[1]
-//                == PackageManager.PERMISSION_GRANTED)) {
-//            getCurrentLocation();
-//        }else {
-//            Toast.makeText(getApplicationContext(),"Permission Denied",Toast.LENGTH_SHORT).show();
-//        }
-//    }
-//
-//
-//    @SuppressLint("MissingPermission")
-//    private void getCurrentLocation() {
-//
-//        LocationManager locationManager = (LocationManager) getSystemService(
-//                Context.LOCATION_SERVICE
-//        );
-//
-//        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-//                || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
-//            fusedLocationProviderClient2.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-//                @Override
-//                public void onComplete(@NonNull Task<Location> task) {
-//                    Location location = task.getResult();
-//
-//                    if (location != null){
-//                        lt.setText(String.valueOf(location.getLatitude()));
-//                        lg.setText(String.valueOf(location.getLongitude()));
-//
-//                    }
-//                    else {
-//                        LocationRequest locationRequest = new LocationRequest()
-//                                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-//                                .setInterval(10000)
-//                                .setFastestInterval(1000)
-//                                .setNumUpdates(1);
-//
-//                        LocationCallback locationCallback = new LocationCallback(){
-//                            @Override
-//                            public void onLocationResult(LocationResult locationResult) {
-//                                Location location1 = locationResult.getLastLocation();
-//
-//                                lt.setText(String.valueOf(location1.getLatitude()));
-//                                lg.setText(String.valueOf(location1.getLongitude()));
-//
-//                            }
-//                        };
-//
-//                        fusedLocationProviderClient2.requestLocationUpdates(locationRequest,
-//                                locationCallback, Looper.myLooper());
-//                    }
-//                }
-//            });
-//
-//        }else {
-//            startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-//                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-//        }
-//    }
 
 
 

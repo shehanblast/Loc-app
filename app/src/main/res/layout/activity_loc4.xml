@@ -8,7 +8,11 @@
     android:padding="16dp"
     android:gravity="center"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:context=".Loc3">
+    tools:context=".Loc4">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/bt_location3"
@@ -115,6 +119,41 @@
         android:id="@+id/tv_lg1"
         android:text="0.0"
         android:textSize="24sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Latitude 04"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_lt2"
+        android:text="0.0"
+        android:textSize="24sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Longitude 04"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginTop="16dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_lg2"
+        android:text="0.0"
+        android:textSize="24sp" />
+
 
     <Button
         android:id="@+id/nxt1"

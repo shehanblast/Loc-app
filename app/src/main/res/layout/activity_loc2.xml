@@ -82,6 +82,13 @@
         android:text="0.0"
         android:textSize="24sp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ff"
+        android:text="m"
+        android:textSize="24sp" />
++
     <Button
         android:id="@+id/nxt1"
         android:layout_width="wrap_content"

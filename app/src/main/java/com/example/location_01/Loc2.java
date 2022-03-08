@@ -36,10 +36,12 @@ import java.util.Locale;
 public class Loc2 extends AppCompatActivity implements LocationListener {
 
     Button btLocation,nxt1;
-    TextView tvLatitude,tvLongitude,lt,lg;
+    TextView tvLatitude,tvLongitude,lt,lg,ff;
     FusedLocationProviderClient fusedLocationProviderClient2;
-    private String lon,lat,lon2,lat2;
+    private String lon,lat,l,ll;
     private boolean t;
+    private int distance;
+    private double lon2,lat2,lol,loll;
     LocationManager locationManager;
 
     @Override
@@ -53,9 +55,13 @@ public class Loc2 extends AppCompatActivity implements LocationListener {
         tvLongitude = findViewById(R.id.tv_longitude2);
         lt = findViewById(R.id.tv_lt);
         lg = findViewById(R.id.tv_lg);
+        ff = findViewById(R.id.ff);
 
         lat = getIntent().getStringExtra("lat");
         lon = getIntent().getStringExtra("lon");
+
+        lol = Double.parseDouble(lat);
+        loll = Double.parseDouble(lon);
 
         tvLatitude.setText(lat);
         tvLongitude.setText(lon);
@@ -106,22 +112,49 @@ public class Loc2 extends AppCompatActivity implements LocationListener {
         lt.setText(String.valueOf(location.getLatitude()));
         lg.setText(String.valueOf(location.getLongitude()));
 
-        lon2 = String.valueOf(location.getLongitude());
-        lat2 = String.valueOf(location.getLatitude());
+        l = String.valueOf(location.getLongitude());
+        ll = String.valueOf(location.getLatitude());
 
-
+        lat2 = location.getLatitude();
+        lon2 = location.getLongitude();
 
     }
 
     private void chg() {
 
-        Intent intent = new Intent(Loc2.this,Loc3.class);
-        intent.putExtra("lat1",lat);
-        intent.putExtra("lon1",lon);
-        intent.putExtra("lat2",lat2);
-        intent.putExtra("lon2",lon2);
-        startActivity(intent);
+        distance = calculateDistanceInKilometer(lol,loll,lat2,lon2);
+//        distance = calculateDistanceInKilometer(6.927079,79.861244,6.7132734,79.9160491);
+        //distance = calculateDistanceInKilometer(6.7132624,79.9160567,6.7133020,79.9160156);
 
+        ff.setText(String.valueOf(distance));
+
+//        Intent intent = new Intent(Loc2.this,Loc3.class);
+//        intent.putExtra("lat1",lat);
+//        intent.putExtra("lon1",lon);
+//        intent.putExtra("lat2",lat2);
+//        intent.putExtra("lon2",lon2);
+//        startActivity(intent);
+
+    }
+
+    public final static double AVERAGE_RADIUS_OF_EARTH_KM = 6371;
+    public int calculateDistanceInKilometer(double userLat, double userLng,
+                                            double venueLat, double venueLng) {
+
+        double latDistance = Math.toRadians(userLat - venueLat);
+        double lngDistance = Math.toRadians(userLng - venueLng);
+
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(userLat)) * Math.cos(Math.toRadians(venueLat))
+                * Math.sin(lngDistance / 2) * Math.sin(lngDistance / 2);
+
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        double r = (AVERAGE_RADIUS_OF_EARTH_KM * c) * 1000;
+
+        int x = (int) r * 1;
+
+        return x;
     }
 
 

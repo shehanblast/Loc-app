@@ -60,8 +60,8 @@ public class Loc2 extends AppCompatActivity implements LocationListener {
         lat = getIntent().getStringExtra("lat");
         lon = getIntent().getStringExtra("lon");
 
-        lol = Double.parseDouble(lat);
-        loll = Double.parseDouble(lon);
+//        lol = Double.parseDouble(lat);
+//        loll = Double.parseDouble(lon);
 
         tvLatitude.setText(lat);
         tvLongitude.setText(lon);
@@ -115,25 +115,25 @@ public class Loc2 extends AppCompatActivity implements LocationListener {
         l = String.valueOf(location.getLongitude());
         ll = String.valueOf(location.getLatitude());
 
-        lat2 = location.getLatitude();
-        lon2 = location.getLongitude();
+//        lat2 = location.getLatitude();
+//        lon2 = location.getLongitude();
 
     }
 
     private void chg() {
 
-        distance = calculateDistanceInKilometer(lol,loll,lat2,lon2);
-//        distance = calculateDistanceInKilometer(6.927079,79.861244,6.7132734,79.9160491);
-        //distance = calculateDistanceInKilometer(6.7132624,79.9160567,6.7133020,79.9160156);
+//        distance = calculateDistanceInKilometer(lol,loll,lat2,lon2);
+////        distance = calculateDistanceInKilometer(6.927079,79.861244,6.7132734,79.9160491);
+//        //distance = calculateDistanceInKilometer(6.7132624,79.9160567,6.7133020,79.9160156);
+//
+//        ff.setText(String.valueOf(distance));
 
-        ff.setText(String.valueOf(distance));
-
-//        Intent intent = new Intent(Loc2.this,Loc3.class);
-//        intent.putExtra("lat1",lat);
-//        intent.putExtra("lon1",lon);
-//        intent.putExtra("lat2",lat2);
-//        intent.putExtra("lon2",lon2);
-//        startActivity(intent);
+        Intent intent = new Intent(Loc2.this,Loc3.class);
+        intent.putExtra("lat1",lat);
+        intent.putExtra("lon1",lon);
+        intent.putExtra("lat2",ll);
+        intent.putExtra("lon2",l);
+        startActivity(intent);
 
     }
 

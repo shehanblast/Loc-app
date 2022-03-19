@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,10 +21,12 @@ import com.google.android.gms.location.LocationListener;
 
 public class Loc3 extends AppCompatActivity implements LocationListener {
 
-    Button btLocation,nxt1;
-    TextView tv_latitude2,tv_longitude2,tv_lt,tv_lg,tv_lt1,tv_lg1;
-    private String lon1,lat1,lon2,lat2,lon3,lat3;
+    Button btLocation,nxt1,nxt2;
+    TextView tv_latitude2,tv_longitude2,tv_lt,tv_lg,tv_lt1,tv_lg1,ff;
+    private String lon1,lat1,lon2,lat2,lon3,lat3,p;
     LocationManager locationManager;
+    private int distance;
+    private double lol,loll,lol1,loll1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,20 +38,24 @@ public class Loc3 extends AppCompatActivity implements LocationListener {
         lat2 = getIntent().getStringExtra("lat2");
         lon2 = getIntent().getStringExtra("lon2");
 
+        lol = Double.valueOf(lat1);
+        loll = Double.valueOf(lon1);
+        lol1 = Double.valueOf(lat2);
+        loll1 = Double.valueOf(lon2);
+
+        Log.i("gg",lat1);
+        Log.i("gg",lon1);
+        Log.i("gg",lat2);
+        Log.i("gg",lon2);
+
         btLocation = findViewById(R.id.bt_location3);
         nxt1 = findViewById(R.id.nxt1);
-        tv_latitude2 = findViewById(R.id.tv_latitude2);
-        tv_longitude2 = findViewById(R.id.tv_longitude2);
-        tv_lt = findViewById(R.id.tv_lt);
-        tv_lg = findViewById(R.id.tv_lg);
+        ff = findViewById(R.id.ff);
+        nxt2 = findViewById(R.id.nxt2);
 
         tv_lt1 = findViewById(R.id.tv_lt1);
         tv_lg1 = findViewById(R.id.tv_lg1);
 
-        tv_latitude2.setText(lat1);
-        tv_longitude2.setText(lon1);
-        tv_lt.setText(lat2);
-        tv_lg.setText(lon2);
 
         //Runtime permissions
         if (ContextCompat.checkSelfPermission(Loc3.this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -73,7 +80,24 @@ public class Loc3 extends AppCompatActivity implements LocationListener {
             }
         });
 
+        nxt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                naviagte();
+            }
+        });
 
+
+
+    }
+
+    private void naviagte() {
+
+        Intent intent = new Intent(Loc3.this,Loc4.class);
+        intent.putExtra("distance1",String.valueOf(distance));
+        intent.putExtra("lat3",lat3);
+        intent.putExtra("lon3",lon3);
+        startActivity(intent);
 
     }
 
@@ -106,14 +130,57 @@ public class Loc3 extends AppCompatActivity implements LocationListener {
 
     private void chg() {
 
-        Intent intent = new Intent(Loc3.this,Loc4.class);
-        intent.putExtra("lat1",lat1);
-        intent.putExtra("lon1",lon1);
-        intent.putExtra("lat2",lat2);
-        intent.putExtra("lon2",lon2);
-        intent.putExtra("lat3",lat3);
-        intent.putExtra("lon3",lon3);
-        startActivity(intent);
+
+        distance = calculateDistanceInKilometer(loll,lol,lol1,loll1);
+  //      distance = calculateDistanceInKilometer(6.927079,79.861244,6.7132734,79.9160491);
+    //    distance = calculateDistanceInKilometer(6.713408110319169,79.91602709961393,6.713184955531217,79.91592511089544);
+
+        ff.setText(String.valueOf(distance));
+
+
 
     }
+
+    public final static double AVERAGE_RADIUS_OF_EARTH_KM = 6371;
+    public int calculateDistanceInKilometer(double userLat, double userLng,
+                                            double venueLat, double venueLng) {
+
+        double latDistance = Math.toRadians(userLat - venueLat);
+        double lngDistance = Math.toRadians(userLng - venueLng);
+
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(userLat)) * Math.cos(Math.toRadians(venueLat))
+                * Math.sin(lngDistance / 2) * Math.sin(lngDistance / 2);
+
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        double r = (AVERAGE_RADIUS_OF_EARTH_KM * c) * 1000;
+
+        int x = (int) r * 1;
+
+        return x;
+
+//////////////
+
+//        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+//
+//        return (int) (Math.round(AVERAGE_RADIUS_OF_EARTH_KM * c));
+
+//        final int R = 6371;
+//        double latDistance = toRad(venueLat-userLat);
+//        double lonDistance = toRad(venueLng-userLng);
+//        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2) +
+//                Math.cos(toRad(userLat)) * Math.cos(toRad(venueLat)) *
+//                        Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+//        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+//        double distance = (R * c) * 1000 ;
+//
+//        int x = (int) distance * 1;
+//        return x;
+    }
+
+    private static double toRad(double value) {
+        return value * Math.PI / 180;
+    }
+
 }

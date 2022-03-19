@@ -16,6 +16,12 @@
         android:id="@+id/bt_location"
         android:text="Get Location"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bt_location1"
+        android:text="next"/>
+
 <!--    <TextView-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->

@@ -41,7 +41,6 @@ public class Loc4 extends AppCompatActivity implements LocationListener {
 
         tv_lt2 = findViewById(R.id.tv_lt2);
         tv_lg2 = findViewById(R.id.tv_lg2);
-        d2 = findViewById(R.id.distance2);
 
         tv_lt1.setText(lat3);
         tv_lg1.setText(lon3);

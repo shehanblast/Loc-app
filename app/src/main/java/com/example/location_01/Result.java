@@ -9,7 +9,7 @@ import android.widget.TextView;
 public class Result extends AppCompatActivity {
 
     Button btLocation,nxt1;
-    TextView area;
+    TextView area,d1,d2;
     private String distance1,lon4,lat4,lon3,lat3;
     private int distance;
     private double lol,loll,lol1,loll1;
@@ -26,6 +26,10 @@ public class Result extends AppCompatActivity {
         lon4 = getIntent().getStringExtra("lon4");
 
         area = findViewById(R.id.area);
+        d1 = findViewById(R.id.d1);
+        d2 = findViewById(R.id.d2);
+
+        d1.setText(distance1);
 
         int x = Integer.valueOf(distance1);
 
@@ -34,11 +38,14 @@ public class Result extends AppCompatActivity {
         lol1 = Double.valueOf(lat4);
         loll1 = Double.valueOf(lon4);
 
-        distance = calculateDistanceInKilometer(loll,lol,lol1,loll1);
+        distance = calculateDistanceInKilometer(lol,loll,lol1,loll1);
+       //    distance = calculateDistanceInKilometer(6.713408110319169,79.91602709961393,6.713184955531217,79.91592511089544);
 
         int a = distance * x;
 
-        area.setText(String.valueOf(a));
+        d2.setText(String.valueOf(distance));
+
+        area.setText(String.valueOf(a) + "m");
 
     }
 
